@@ -4,6 +4,8 @@ const eject = require("./eject").eject;
 const getPrevious = require("./utility/getPrevious").getPrevious;
 const emojis = require("../emojis.json");
 const getChannel = require("./utility/getChannel");
+const getUserVoiceChannel = require("./utility/getUserVoiceChannel").getUserVoiceChannel;
+
 
 dotenv.config();
 const client = new Discord.Client();
@@ -47,21 +49,15 @@ client.on("message", message => {
             }).catch(console.error);
             break;
         case "study":
-            let targetChannel = args[0];
+            let channelTag = args[0];
 
             let nerd = message.author.username;
-            let voiceChannel = message.member.voice.channel
-            if (!voiceChannel) {
-                message.reply("Please join a voice channel to use this command")
-                    .then((message) => {
-                        message.delete({ timeout: 5000 });
-                    });
-                return;
-            };
-
+            let voiceChannel = getUserVoiceChannel(message);
+            if (!voiceChannel) break;
+            
             let announcement = `boop **${nerd}** wants to hang out in **${voiceChannel.name}**`;
 
-            getChannel.byTag(client, targetChannel)
+            getChannel.byTag(client, channelTag)
                 .then((channel) => {
                     channel.send(announcement);
                     message.react(emojis.thumbs_up);
