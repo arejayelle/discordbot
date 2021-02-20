@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const dotenv = require('dotenv');
 const eject = require("./eject").eject;
+const getPrevious = require("./utility/getPrevious").getPrevious;
 const emojis = require("../emojis.json");
 
 dotenv.config();
