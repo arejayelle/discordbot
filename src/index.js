@@ -35,6 +35,17 @@ client.on("message", message => {
         　　'　　 ${args.join(" ")} was The Imposter 　 　　。
         　　ﾟ　　　.　　　. ,　　　　.　 .`);
             break;
+        case "f":
+            message.channel.messages.fetch({ limit: 1, before: message.id }).then((messages) => {
+
+                console.log(messages.content);
+                messages.first().react(`🇫`);
+
+            }).catch(console.error);
+            message.delete();
+
+            break;
+
     }
 
 });
