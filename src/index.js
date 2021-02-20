@@ -15,3 +15,8 @@ client.on("message", message => {
     if (!message.content.startsWith(`${PREFIX}hi`)) return;
     message.reply("I am small and green!");
 })
+client.on("message", message => {
+    if (!message.content.startsWith(`${PREFIX}egg`)) return;
+    message.react("812539765088976916");
+})
+
