@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const dotenv = require('dotenv');
+const eject = require("./eject").eject;
 
 dotenv.config();
 const client = new Discord.Client();
@@ -28,12 +29,7 @@ client.on("message", message => {
 
     switch (command) {
         case "eject":
-            message.channel.send(`. 　　　。　　　　•　 　ﾟ　　。 　　.
-        　　　.　　　 　　.　　　　　。　　 。　. 　
-        .　　 。　　　　　 ඞ 。 . 　　 • 　　　　•
-        　　ﾟ　   　${args.join(" ")} was ejected.　 。　.
-        　　'　　 ${args.join(" ")} was The Imposter 　 　　。
-        　　ﾟ　　　.　　　. ,　　　　.　 .`);
+            eject(message, args);
             break;
         case "f":
             message.channel.messages.fetch({ limit: 1, before: message.id }).then((messages) => {
