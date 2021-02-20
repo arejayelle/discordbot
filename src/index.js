@@ -31,14 +31,11 @@ client.on("message", message => {
         case "eject":
             eject(message, args);
             break;
-        case "f":
-            message.channel.messages.fetch({ limit: 1, before: message.id }).then((messages) => {
-
-                messages.first().react(`🇫`);
-
+        case "f": //reacts F to the previous message & deletes the command
+            getPrevious(message).then((messages) => {
+                messages.first().react(emojis.regional_indicator_F);
             }).catch(console.error);
             message.delete();
-
             break;
 
     }
