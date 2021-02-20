@@ -6,7 +6,7 @@ const getChannel = require("../utility/getChannel");
 function study(client, message, arguments){
     let channelTag = arguments[0];
 
-    let nerd = message.author.username;
+    let nerd = message.member.displayName;
     let voiceChannel = getUserVoiceChannel(message);
     if (!voiceChannel) return;
     
