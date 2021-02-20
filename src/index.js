@@ -32,7 +32,39 @@ client.on("message", message => {
             message.react(emojis.precious);
             break;
         case "eject":
-            eject(message, arguments);
+            var sus = arguments.join(" ");
+            message.channel.send(`${sus} is sus.. Vote them out?`).then((botMessage) => {
+
+                botMessage.react(emojis.skull).then(() => botMessage.react(emojis.no_evil));
+                const filter = (reaction) => {
+                    return [emojis.skull, emojis.no_evil].includes(reaction.emoji.name);
+                };
+
+                botMessage.awaitReactions(filter, { time: 5000 })
+                    .then(collected => {
+                        var i = 0
+                        var store = [];
+
+                        collected.forEach((react) => {
+                            console.log(`${react.count}`);
+                            store[i++] = react.count;
+                        })
+                        if (store[0] > store[1]) {
+                                eject(message, sus)
+                        }
+                        else if (store[0] == store[1]) {
+                            if (store[0] == 1) { message.channel.send("No one was ejected.... cause no one voted :cry:"); }
+                            else { message.channel.send("No one was ejected (there was a tie)"); }
+                        }
+                        else {
+                            message.channel.send(`${sus} was voted innocent`);
+                        }
+
+                        console.log("time's up!");
+                    }).catch(() => {
+                        console.log("nope");
+                    })
+            })
             break;
         case "f": //reacts F to the previous message & deletes the command
             getPrevious(message).then((messages) => {
@@ -47,6 +79,8 @@ client.on("message", message => {
             }).catch(console.error);
             break;
         case "study":
+            // send a message in a channel to come study
+            // format {prefix}study #channel-to-post-in
             study(client, message, arguments);
             break;
     }
