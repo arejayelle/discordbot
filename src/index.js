@@ -38,7 +38,6 @@ client.on("message", message => {
         case "f":
             message.channel.messages.fetch({ limit: 1, before: message.id }).then((messages) => {
 
-                console.log(messages.content);
                 messages.first().react(`🇫`);
 
             }).catch(console.error);
