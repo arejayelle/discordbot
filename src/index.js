@@ -38,6 +38,12 @@ client.on("message", message => {
             }).catch(console.error);
             message.delete();
             break;
+        case "this": //reacts point up to the previous message & deletes the command
+            getPrevious(message).then((messages) => {
+                messages.first().react(emojis.point_up);
+                message.delete();
+            }).catch(console.error);
+            break;
 
     }
 
