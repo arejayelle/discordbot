@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const eject = require("./eject").eject;
 const getPrevious = require("./utility/getPrevious").getPrevious;
 const emojis = require("../emojis.json");
+const getChannel = require("./utility/getChannel");
 
 dotenv.config();
 const client = new Discord.Client();
@@ -47,7 +48,6 @@ client.on("message", message => {
             break;
         case "study":
             let targetChannel = args[0];
-            const channelRegex = /<#\d{18}>/;
 
             let nerd = message.author.username;
             let voiceChannel = message.member.voice.channel
@@ -61,19 +61,16 @@ client.on("message", message => {
 
             let announcement = `boop **${nerd}** wants to hang out in **${voiceChannel.name}**`;
 
-            if (typeof (targetChannel) !== "undefined" && targetChannel.match(channelRegex)) {
-                targetChannel = targetChannel.substr(2, 18);
-                client.channels
-                    .fetch(targetChannel)
-                    .then(channel => {
-                        channel.send(announcement);
-                        message.react(emojis.thumbs_up);
-                    })
-            } else {
-                message.channel.send(announcement);
-                message.delete();
-            }
-
+            getChannel.byTag(client, targetChannel)
+                .then((channel) => {
+                    channel.send(announcement);
+                    message.react(emojis.thumbs_up);
+                })
+                .catch(() => {
+                    message.channel.send(announcement);
+                    message.delete();
+                }
+                )
     }
 
 });
