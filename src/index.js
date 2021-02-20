@@ -50,7 +50,7 @@ client.on("message", message => {
                             store[i++] = react.count;
                         })
                         if (store[0] > store[1]) {
-                                eject(message, sus)
+                            eject(message, sus)
                         }
                         else if (store[0] == store[1]) {
                             if (store[0] == 1) { message.channel.send("No one was ejected.... cause no one voted :cry:"); }
@@ -59,8 +59,6 @@ client.on("message", message => {
                         else {
                             message.channel.send(`${sus} was voted innocent`);
                         }
-
-                        console.log("time's up!");
                     }).catch(() => {
                         console.log("nope");
                     })
