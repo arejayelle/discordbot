@@ -20,3 +20,21 @@ client.on("message", message => {
     message.react("812539765088976916");
 })
 
+client.on("message", message => {
+    if (!message.content.startsWith(`${PREFIX}`)) return;
+
+    const args = message.content.slice(PREFIX.length).trim().split(' ');
+    const command = args.shift().toLowerCase();
+
+    switch (command) {
+        case "eject":
+            message.channel.send(`. 　　　。　　　　•　 　ﾟ　　。 　　.
+        　　　.　　　 　　.　　　　　。　　 。　. 　
+        .　　 。　　　　　 ඞ 。 . 　　 • 　　　　•
+        　　ﾟ　   　${args.join(" ")} was ejected.　 。　.
+        　　'　　 ${args.join(" ")} was The Imposter 　 　　。
+        　　ﾟ　　　.　　　. ,　　　　.　 .`);
+            break;
+    }
+
+});
