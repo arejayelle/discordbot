@@ -19,8 +19,8 @@ const { PREFIX } = process.env;
 client.on("message", message => {
     if (!message.content.startsWith(`${PREFIX}`)) return;
 
-    const arguments = message.content.slice(PREFIX.length).trim().split(' ');
-    const command = arguments.shift().toLowerCase();
+    const parameters = message.content.slice(PREFIX.length).trim().split(' ');
+    const command = parameters.shift().toLowerCase();
 
     console.log(`checking the command!`);
     switch (command) {
@@ -32,7 +32,7 @@ client.on("message", message => {
             message.react(emojis.precious);
             break;
         case "sus":
-            sus(message,arguments);
+            sus(message,parameters);
             break;
         case "f": //reacts F to the previous message & deletes the command
             getPrevious(message).then((messages) => {
@@ -49,7 +49,7 @@ client.on("message", message => {
         case "study":
             // send a message in a channel to come study
             // format {prefix}study #channel-to-post-in
-            study(client, message, arguments);
+            study(client, message, parameters);
             break;
     }
 

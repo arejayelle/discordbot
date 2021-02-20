@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const emojis = require("../../emojis.json");
 
-function susVote(message, arguments) {
-    var sus = arguments.join(" ");
+function susVote(message, parameters) {
+    var sus = parameters.join(" ");
     
     message.channel.send(`${sus} is sus.. Vote them out?`).then((botMessage) => {
 

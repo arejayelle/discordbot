@@ -3,8 +3,8 @@ const emojis = require("../../emojis.json");
 const getUserVoiceChannel = require("../utility/getUserVoiceChannel").getUserVoiceChannel;
 const getChannel = require("../utility/getChannel");
 
-function study(client, message, arguments){
-    let channelTag = arguments[0];
+function study(client, message, parameters){
+    let channelTag = parameters[0];
 
     let nerd = message.member.displayName;
     let voiceChannel = getUserVoiceChannel(message);
