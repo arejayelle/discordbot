@@ -21,6 +21,7 @@ client.on("message", message => {
     const args = message.content.slice(PREFIX.length).trim().split(' ');
     const command = args.shift().toLowerCase();
 
+    console.log(`checking the command!`);
     switch (command) {
         case "hi":
             // message.reply("I am small and green!");
@@ -44,6 +45,34 @@ client.on("message", message => {
                 message.delete();
             }).catch(console.error);
             break;
+        case "study":
+            let targetChannel = args[0];
+            const channelRegex = /<#\d{18}>/;
+
+            let nerd = message.author.username;
+            let voiceChannel = message.member.voice.channel
+            if (!voiceChannel) {
+                message.reply("Please join a voice channel to use this command")
+                    .then((message) => {
+                        message.delete({ timeout: 5000 });
+                    });
+                return;
+            };
+
+            let announcement = `boop **${nerd}** wants to hang out in **${voiceChannel.name}**`;
+
+            if (typeof (targetChannel) !== "undefined" && targetChannel.match(channelRegex)) {
+                targetChannel = targetChannel.substr(2, 18);
+                client.channels
+                    .fetch(targetChannel)
+                    .then(channel => {
+                        channel.send(announcement);
+                        message.react(emojis.thumbs_up);
+                    })
+            } else {
+                message.channel.send(announcement);
+                message.delete();
+            }
 
     }
 
