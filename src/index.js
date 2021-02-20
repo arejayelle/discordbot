@@ -11,3 +11,7 @@ client.login(process.env.TOKEN);
 
 const { SECRET, PREFIX } = process.env;
 
+client.on("message", message => {
+    if (!message.content.startsWith(`${PREFIX}hi`)) return;
+    message.reply("I am small and green!");
+})
