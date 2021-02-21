@@ -14,6 +14,7 @@ function susVote(message, parameters) {
         if (botMessage.mentions.members.first()){
             sus = botMessage.mentions.members.first().displayName;
         }
+        else if(botMessage.mentions.roles.first()){
             sus = botMessage.mentions.roles.first().name
         }
 
