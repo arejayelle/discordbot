@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const getEmojis = require("../utility/getEmojis").getEmojis;
+const getServerEmojis = require("../utility/getEmojis.js").getServerEmojis;
 const getUserVoiceChannel = require("../utility/getUserVoiceChannel").getUserVoiceChannel;
 const getChannel = require("../utility/getChannel");
 
@@ -8,7 +8,7 @@ function study(client, message, parameters){
 
     const nerd = message.member.displayName;
     const voiceChannel = getUserVoiceChannel(message);
-    const emojis = getEmojis(message.guild.id);
+    const serverEmojis = getServerEmojis(message.guild.id);
     if (!voiceChannel) return;
     
     let announcement = `boop **${nerd}** wants to hang out in **${voiceChannel.name}**`;
@@ -16,7 +16,7 @@ function study(client, message, parameters){
     getChannel.byTag(client, channelTag)
         .then((channel) => {
             channel.send(announcement);
-            message.react(emojis.thumbs_up);
+            message.react(serverEmojis.thumbs_up);
         })
         .catch(() => {
             message.channel.send(announcement);
