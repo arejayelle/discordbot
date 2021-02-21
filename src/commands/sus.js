@@ -11,7 +11,7 @@ function susVote(message, parameters) {
             return [emojis.skull, emojis.no_evil].includes(reaction.emoji.name);
         };
 
-        botMessage.awaitReactions(filter, { time: 5000 })
+        botMessage.awaitReactions(filter, { time: 60000 })
             .then(collected => {
                 var i = 0
                 var store = [];
@@ -40,21 +40,24 @@ function eject(message, sus) {
 
     let val = Math.floor(Math.random() * 10);
 
-    let imposterMsg = `. 　　　。　　　　•　 　ﾟ　　。 　　.
+    let innocentMsg = `\`\`\`
+    . 　　　。　　　　•　 　ﾟ　　。 　　.
     　　　.　　　 　　.　　　　　。　　 。　. 　
     .　　 。　　　　　 ඞ 。 . 　　 • 　　　　•
     　　ﾟ　   　${sus} was ejected.　 。　.
     　　'　　 ${sus} was NOT an Imposter 　 　　。
-    　　ﾟ　　　.　　　. ,　　　　.　 .`;
+    　　ﾟ　　　.　　　. ,　　　　.　 .\`\`\``;
 
-    let innocentMsg = `. 　　　。　　　　•　 　ﾟ　　。 　　.
+    let imposterMsg = `\`\`\`
+    . 　　　。　　　　•　 　ﾟ　　。 　　.
     　　　.　　　 　　.　　　　　。　　 。　. 　
     .　　 。　　　　　 ඞ 。 . 　　 • 　　　　•
     　　ﾟ　   　${sus} was ejected.　 。　.
     　　'　　 ${sus} was The Imposter 　 　　。
-    　　ﾟ　　　.　　　. ,　　　　.　 .`;
+    　　ﾟ　　　.　　　. ,　　　　.　 .\`\`\``;
 
-    if (val < 7 && !(message.content.toLowerCase().includes("egg"))) {
+    if (((message.content.toLowerCase().includes("nubb"))) ||
+        (val < 7 && !(message.content.toLowerCase().includes("egg")))) {
         message.channel.send(innocentMsg);
     }
     else {
