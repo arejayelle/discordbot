@@ -1,13 +1,14 @@
 const Discord = require('discord.js');
-const emojis = require("../../emojis.json");
+const getEmojis = require("../utility/getEmojis").getEmojis;
 const getUserVoiceChannel = require("../utility/getUserVoiceChannel").getUserVoiceChannel;
 const getChannel = require("../utility/getChannel");
 
 function study(client, message, parameters){
-    let channelTag = parameters[0];
+    const channelTag = parameters[0];
 
-    let nerd = message.member.displayName;
-    let voiceChannel = getUserVoiceChannel(message);
+    const nerd = message.member.displayName;
+    const voiceChannel = getUserVoiceChannel(message);
+    const emojis = getEmojis(message.guild.id);
     if (!voiceChannel) return;
     
     let announcement = `boop **${nerd}** wants to hang out in **${voiceChannel.name}**`;

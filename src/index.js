@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const dotenv = require('dotenv');
-const sus = require("./commands/sus").sus;
 const getPrevious = require("./utility/getPrevious").getPrevious;
-const emojis = require("../emojis.json");
+const getEmojis = require("./utility/getEmojis.js").getEmojis;
+const sus = require("./commands/sus").sus;
 const study = require("./commands/study").study;
 
 dotenv.config();
@@ -10,14 +10,16 @@ const client = new Discord.Client();
 
 client.login(process.env.TOKEN);
 
+
 client.once('ready', () => {
-    console.log('Ready!');
+    console.log('Ready!');   
 });
 
 const { PREFIX } = process.env;
 
 client.on("message", message => {
     if (!message.content.startsWith(`${PREFIX}`)) return;
+    const emojis = getEmojis(message.guild.id);
 
     const parameters = message.content.slice(PREFIX.length).trim().split(' ');
     const command = parameters.shift().toLowerCase();
@@ -29,7 +31,7 @@ client.on("message", message => {
             message.channel.send("I am small and green!");
             break;
         case "egg":
-            message.react(emojis.precious);
+            message.react(emojis.guild.precious);
             break;
         case "sus":
             sus(message,parameters);
