@@ -1,14 +1,14 @@
 const Discord = require('discord.js');
-const getEmojis = require("../utility/getEmojis").getEmojis;
+const getServerEmojis = require("../utility/getEmojis.js").getServerEmojis;
 
 function susVote(message, parameters) {
     var sus = parameters.join(" ");
-    const emojis = getEmojis(message.guild.id);
+    const serverEmojis = getServerEmojis(message.guild.id);
     message.channel.send(`${sus} is sus.. Vote them out?`).then((botMessage) => {
 
-        botMessage.react(emojis.skull).then(() => botMessage.react(emojis.no_evil));
+        botMessage.react(serverEmojis.skull).then(() => botMessage.react(serverEmojis.no_evil));
         const filter = (reaction) => {
-            return [emojis.skull, emojis.no_evil].includes(reaction.emoji.name);
+            return [serverEmojis.skull, serverEmojis.no_evil].includes(reaction.emoji.name);
         };
 
         botMessage.awaitReactions(filter, { time: 60000 })
@@ -20,7 +20,7 @@ function susVote(message, parameters) {
                     console.log(`${react.count}`);
                     store[i++] = react.count;
                 })
-                
+
                 if (store[0] > store[1]) {
                     eject(message, sus)
                 }

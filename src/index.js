@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const dotenv = require('dotenv');
 const getPrevious = require("./utility/getPrevious").getPrevious;
-const getEmojis = require("./utility/getEmojis.js").getEmojis;
+const getServerEmojis = require("./utility/getEmojis.js").getServerEmojis;
 const sus = require("./commands/sus").sus;
 const study = require("./commands/study").study;
 
@@ -19,7 +19,7 @@ const { PREFIX } = process.env;
 
 client.on("message", message => {
     if (!message.content.startsWith(`${PREFIX}`)) return;
-    const emojis = getEmojis(message.guild.id);
+    const serverEmojis = getServerEmojis(message.guild.id);
 
     const parameters = message.content.slice(PREFIX.length).trim().split(' ');
     const command = parameters.shift().toLowerCase();
@@ -31,20 +31,21 @@ client.on("message", message => {
             message.channel.send("I am small and green!");
             break;
         case "egg":
-            message.react(emojis.guild.precious);
+            message.react(serverEmojis.precious);
             break;
         case "sus":
             sus(message,parameters);
             break;
         case "f": //reacts F to the previous message & deletes the command
+
             getPrevious(message).then((messages) => {
-                messages.first().react(emojis.regional_indicator_F);
+                messages.first().react(serverEmojis.regional_indicator_F);
             }).catch(console.error);
             message.delete();
             break;
         case "this": //reacts point up to the previous message & deletes the command
             getPrevious(message).then((messages) => {
-                messages.first().react(emojis.point_up);
+                messages.first().react(serverEmojis.point_up);
                 message.delete();
             }).catch(console.error);
             break;

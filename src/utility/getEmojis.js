@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
-function getEmojis(guildID) {
+function getServerEmojis(guildID) {
     switch (guildID) {
         case process.env.ZozTestID:
             return require("./emojis/ZTServer.json");
@@ -10,4 +10,4 @@ function getEmojis(guildID) {
     }
 }
 
-exports.getEmojis = getEmojis;
+exports.getServerEmojis = getServerEmojis;
