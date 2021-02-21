@@ -11,7 +11,13 @@ function susVote(message, parameters) {
             return [serverEmojis.skull, serverEmojis.no_evil].includes(reaction.emoji.name);
         };
 
-        botMessage.awaitReactions(filter, { time: 60000 })
+        if (botMessage.mentions.members.first()){
+            sus = botMessage.mentions.members.first().displayName;
+        }
+            sus = botMessage.mentions.roles.first().name
+        }
+
+        botMessage.awaitReactions(filter, { time: 10000 })
             .then(collected => {
                 var i = 0
                 var store = [];
@@ -38,6 +44,7 @@ function susVote(message, parameters) {
 }
 function eject(message, sus) {
 
+    console.log(sus);
     let val = Math.floor(Math.random() * 10);
 
     let innocentMsg = `\`\`\`
