@@ -25,8 +25,6 @@ const { PREFIX } = process.env;
 
 client.on("message", message => {
     if (!message.content.startsWith(`${PREFIX}`)) return;
-    const serverEmojis = getServerEmojis(message.guild.id);
-
     const parameters = message.content.slice(PREFIX.length).trim().split(' ');
     const command = parameters.shift().toLowerCase();
 
@@ -39,7 +37,4 @@ client.on("message", message => {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
     }
-
-    //         //     sus(message, parameters);
-
 });
