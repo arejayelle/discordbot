@@ -33,36 +33,14 @@ client.on("message", message => {
     const command = parameters.shift().toLowerCase();
 
     console.log(`checking the command!`);
-    if (client.commands)
-        switch (command) {
-            case "hi":
-                // message.reply("I am small and green!");
-                message.channel.send("I am small and green!");
-                break;
-            case "egg":
-                message.react(serverEmojis.precious);
-                break;
-            case "sus":
-                sus(message, parameters);
-                break;
-            case "f": //reacts F to the previous message & deletes the command
+    if (!client.commands.has(command)) return;
 
-                getPrevious(message).then((messages) => {
-                    messages.first().react(serverEmojis.regional_indicator_F);
-                }).catch(console.error);
-                message.delete();
-                break;
-            case "this": //reacts point up to the previous message & deletes the command
-                getPrevious(message).then((messages) => {
-                    messages.first().react(serverEmojis.point_up);
-                    message.delete();
-                }).catch(console.error);
-                break;
-            case "study":
-                // send a message in a channel to come study
-                // format {prefix}study #channel-to-post-in
-                study(client, message, parameters);
-                break;
-        }
+    try {
+        client.commands.get(command).execute(message, parameters);
+    } catch (error) {
+        console.error(error);
+        message.reply('there was an error trying to execute that command!');
+    }
+
 
 });

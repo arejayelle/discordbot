@@ -6,7 +6,6 @@ module.exports = {
     description: 'Agree/bring attention to whatever was posted before',
     execute(message, args) {
         const serverEmojis = getServerEmojis(message.guild.id);
-
         reactToPrevious(message, serverEmojis.point_up);
     }
 }

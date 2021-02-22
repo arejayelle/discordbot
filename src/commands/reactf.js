@@ -6,7 +6,6 @@ module.exports = {
     description: 'pay respects to whatever was posted before',
     execute(message, args) {
         const serverEmojis = getServerEmojis(message.guild.id);
-
         reactToPrevious(message, serverEmojis.regional_indicator_F);
     }
 }

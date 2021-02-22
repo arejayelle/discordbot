@@ -73,13 +73,10 @@ function eject(message, sus) {
     }
 
 }
-// module.exports =
-var a = {
+module.exports = {
     name: 'sus',
     description : 'someone seems kinda sus... What does everyone else think?',
     execute(message, parameters) {
         susVote(message, parameters);
     }
 }
-
-exports.sus = susVote;
