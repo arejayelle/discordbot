@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 // utility
 const getPrevious = require("./utility/getPrevious").getPrevious;
 const getServerEmojis = require("./utility/getEmojis.js").getServerEmojis;
-const sus = require("./commands/sus").sus;
-const study = require("./commands/study").study;
 
 dotenv.config();
 
@@ -42,5 +40,6 @@ client.on("message", message => {
         message.reply('there was an error trying to execute that command!');
     }
 
+    //         //     sus(message, parameters);
 
 });

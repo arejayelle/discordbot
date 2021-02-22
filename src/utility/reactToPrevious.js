@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const getPrevious = require('./getPrevious').getPrevious;
 
 function reactToPrevious(message, react){
 
@@ -10,5 +11,5 @@ function reactToPrevious(message, react){
 }
 
 module.exports = {
-    reactToPrevious
+    reactToPrevious : reactToPrevious
 }
